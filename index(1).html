@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Kala Culture Tattoos - Best Tattoo Studio in Vadodara. 5+ years experience, 500+ customers.">
+    <title>The Kala Culture Tattoos | Best Studio in Vadodara</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        /* Custom Tattoo Needle Cursor */
+        :root {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32"><defs><style>.needle{fill:none;stroke:%231a1a1a;stroke-width:2;stroke-linecap:round}</style></defs><line class="needle" x1="12" y1="2" x2="12" y2="24"/><circle cx="12" cy="28" r="2" fill="%231a1a1a"/><path class="needle" d="M8 12 L16 12" stroke-width="1.5"/></svg>') 12 2, auto;
+        }
+
+        a, button {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32"><defs><style>.needle{fill:none;stroke:%231a1a1a;stroke-width:2.5;stroke-linecap:round}</style></defs><line class="needle" x1="12" y1="2" x2="12" y2="24"/><circle cx="12" cy="28" r="2.5" fill="%231a1a1a"/></svg>') 12 2, pointer;
+        }
+
+        /* Floating Buttons */
+        .floating-btn-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            z-index: 40;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            animation: float 3s ease-in-out infinite;
+            border: 3px solid white;
+        }
+
+        .floating-btn-call {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 40;
+            box-shadow: 0 4px 15px rgba(26, 26, 26, 0.4);
+            text-decoration: none;
+            animation: float 3s ease-in-out infinite;
+            animation-delay: 0.2s;
+            border: 3px solid white;
+        }
+
+        .floating-btn-whatsapp:hover,
+        .floating-btn-call:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        .logo-main {
+            color: #1a1a1a;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1a1a1a;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            header {
+                padding: 15px 20px;
+            }
+        }
+
+        /* Offer Banner - Scrolling */
+        .offer-banner {
+            background: #1a1a1a;
+            color: white;
+            padding: 16px 20px;
+            overflow: hidden;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .offer-scroll {
+            display: flex;
+            gap: 80px;
+            animation: scroll 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        .offer-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .offer-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 26, 26, 0.65), rgba(26, 26, 26, 0.65)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/><circle cx="150" cy="100" r="80" fill="%23e0e0e0" opacity="0.3"/><circle cx="1050" cy="500" r="120" fill="%23e0e0e0" opacity="0.2"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 40px;
+            text-align: center;
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .btn-book {
+            background: white;
+            color: #1a1a1a;
+        }
+
+        .btn-book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+        }
+
+        .btn-explore {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-explore:hover {
+            background: white;
+            color: #1a1a1a;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Section - Horizontal */
+        .stats-section {
+            background: white;
+            padding: 80px 40px;
+            margin-top: -60px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            line-height: 1;
+            letter-spacing: -1px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .stat-plus {
+            font-size: 44px;
+            margin-left: 2px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        /* Features Grid */
+        section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: -1px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background: #f0f0f0;
+            border-color: #1a1a1a;
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Carousel */
+        .carousel-wrapper {
+            background: white;
+        }
+
+        .carousel-items {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 350px;
+            background: #e5e5e5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .carousel-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.3px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .carousel-content p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .carousel-rating {
+            color: #1a1a1a;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+
+        /* School Section */
+        .school-section {
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .school-section h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -0.3px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .school-number {
+            font-size: 72px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin: 30px 0;
+            letter-spacing: -1px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .school-section p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 450px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .form-box {
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+        }
+
+        .form-box h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -0.3px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .form-box input,
+        .form-box textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+            transition: border-color 0.3s;
+            font-weight: 500;
+        }
+
+        .form-box input:focus,
+        .form-box textarea:focus {
+            outline: none;
+            border-color: #1a1a1a;
+        }
+
+        .form-box button {
+            width: 100%;
+            background: #1a1a1a;
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+            font-size: 15px;
+        }
+
+        .form-box button:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e5e5e5;
+            text-align: center;
+        }
+
+        .contact-info p {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .contact-info p strong {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 40px 20px;
+            font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.3px;
+            font-size: 16px;
+        }
+
+        .footer-section a {
+            color: #d0d0d0;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px;
+                min-height: 400px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-item {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .stats-grid {
+                gap: 30px;
+            }
+        }
+
+        /* Premium Kala Culture refinements */
+        body { background:#f3f3f1; color:#171717; font-family:'DM Sans',sans-serif; }
+        h1,h2,h3,.section-title,.logo-main,.process-number { font-family:'Space Grotesk','DM Sans',sans-serif; }
+        header { background:rgba(255,255,255,.94); border-bottom:1px solid #e2e2df; box-shadow:0 4px 18px rgba(0,0,0,.06); }
+        .logo { display:flex; align-items:center; text-decoration:none; min-width:210px; }
+        .logo-img { width:180px; max-height:54px; object-fit:contain; object-position:left center; display:block; }
+        .logo-fallback { display:none; color:#171717; font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; letter-spacing:-.04em; line-height:1; }
+        .logo-fallback small { display:block; margin-top:5px; font-family:'DM Sans',sans-serif; font-size:9px; letter-spacing:.26em; color:#777; font-weight:600; }
+        .offer-banner { background:#202020; }
+        .hero { background:linear-gradient(135deg,#eeeeeb 0%,#ffffff 55%,#e5e5e1 100%); color:#171717; overflow:hidden; min-height:620px; }
+        .hero:after { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.9),transparent 45%); pointer-events:none; }
+        .hero h1 { color:#111; position:relative; z-index:2; }
+        .hero p { color:#5c5c5c; position:relative; z-index:2; }
+        .hero-content { position:relative; z-index:3; }
+        .btn-book { background:#111; color:#fff; }
+        .btn-book:hover { background:#2a2a2a; box-shadow:0 12px 30px rgba(0,0,0,.16); }
+        .btn-explore { color:#111; border-color:#111; }
+        .btn-explore:hover { background:#111; color:#fff; }
+        .stats-section { background:#fff; box-shadow:0 12px 35px rgba(0,0,0,.07); }
+        .stat-number { font-family:'Space Grotesk',sans-serif; }
+        section { background:#fff; }
+        section:nth-of-type(even) { background:#f1f1ee; }
+        .features-grid { gap:22px; }
+        .feature-card { background:#fff; border:1px solid #e3e3df; box-shadow:0 8px 24px rgba(0,0,0,.055); border-radius:18px; }
+        .feature-card:hover { background:#fff; border-color:#bcbcb7; box-shadow:0 16px 34px rgba(0,0,0,.10); }
+        .carousel-wrapper { background:#f1f1ee; }
+        .carousel-item { background:#fff; box-shadow:0 10px 30px rgba(0,0,0,.07); border:1px solid #e5e5e1; }
+        .process-section { position:relative; max-width:none; background:#ededeb !important; overflow:hidden; padding:100px 40px; }
+        .process-inner { max-width:1220px; margin:auto; position:relative; z-index:2; }
+        .process-heading { max-width:680px; margin-bottom:55px; }
+        .process-heading > span { font-size:11px; letter-spacing:.28em; font-weight:700; color:#777; }
+        .process-heading h2 { margin:10px 0 14px; font-size:clamp(42px,6vw,72px); line-height:1; letter-spacing:-.055em; }
+        .process-heading p { color:#666; font-size:16px; max-width:560px; }
+        .process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid #cfcfca; border-bottom:1px solid #cfcfca; }
+        .process-step { padding:30px 28px 34px 0; margin-right:28px; border-right:1px solid #cfcfca; display:flex; flex-direction:column; gap:28px; }
+        .process-step:last-child { border-right:0; margin-right:0; }
+        .process-number { font-size:64px; line-height:.9; letter-spacing:-.06em; color:#222; font-weight:600; }
+        .process-step h3 { font-size:22px; margin-bottom:8px; }
+        .process-step p { color:#666; font-size:14px; line-height:1.65; max-width:230px; }
+        .greek-doodle { position:absolute; color:#1b1b1b; opacity:.075; pointer-events:none; z-index:1; }
+        .greek-doodle svg { width:100%; height:100%; }
+        .greek-doodle-right { width:260px; height:430px; right:-40px; top:80px; transform:rotate(3deg); }
+        .greek-doodle-left { width:220px; height:390px; left:-35px; bottom:-80px; transform:rotate(-5deg); }
+        .school-section { background:#e8e8e5; border:1px solid #dcdcd7; box-shadow:0 12px 30px rgba(0,0,0,.06); }
+        .map-container { box-shadow:0 10px 30px rgba(0,0,0,.08); }
+        .form-box { background:#fff; box-shadow:0 10px 30px rgba(0,0,0,.06); }
+        .google-review-link { display:inline-flex; align-items:center; gap:8px; margin-top:10px; font-weight:700; color:#222; text-decoration:underline; text-underline-offset:4px; }
+        footer { background:#191919; }
+        .floating-btn-call { background:#1f9d55; border-color:#fff; }
+        .floating-btn-call:hover { background:#178445; }
+        @media (max-width:900px) { .process-steps { grid-template-columns:repeat(2,1fr); } .process-step:nth-child(2) { border-right:0; } .process-step:nth-child(3), .process-step:nth-child(4) { border-top:1px solid #cfcfca; } }
+        @media (max-width:600px) { .logo-img { width:145px; max-height:45px; } .process-section { padding:70px 20px; } .process-steps { grid-template-columns:1fr; } .process-step, .process-step:nth-child(2) { border-right:0; border-bottom:1px solid #cfcfca; margin-right:0; padding-right:0; } .process-step:last-child { border-bottom:0; } .greek-doodle-right { width:150px; height:260px; right:-45px; top:120px; } .greek-doodle-left { width:130px; height:230px; left:-35px; } }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"TattooParlor",
+      "name":"The Kala Culture Tattoos",
+      "url":"https://thekalaculturetattoos.in/",
+      "telephone":"+91 9157714414",
+      "email":"thekalaculture0@gmail.com",
+      "address":{"@type":"PostalAddress","streetAddress":"102, Neelkanth Gold Complex, Vasna-Bhayli Main Rd","addressLocality":"Vadodara","addressRegion":"Gujarat","postalCode":"390020","addressCountry":"IN"},
+      "sameAs":["https://instagram.com/thekalaaculturetattoos","https://maps.app.goo.gl/zzibzD1SfPJFj7vJ7"]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/919157714414" target="_blank" class="floating-btn-whatsapp" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="tel:+919157714414" class="floating-btn-call" title="Call us">
+        <i class="fas fa-phone"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a class="logo" href="#home" aria-label="The Kala Culture Tattoos home">
+                <!-- Upload your real logo to the same GitHub folder and name it exactly logo.png -->
+                <img src="logo.png" alt="The Kala Culture Tattoos logo" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <span class="logo-fallback">The Kala Culture<small>TATTOO STUDIO</small></span>
+            </a>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#process">Process</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#school">School</a>
+                <a href="#contact">Contact</a>
+                <a href="https://instagram.com/thekalaaculturetattoos" target="_blank">Instagram</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Offer Banner - Scrolling -->
+    <div class="offer-banner">
+        <div class="offer-scroll">
+            <div class="offer-item">🎯 UPTO 30% OFF</div>
+            <div class="offer-item">📅 5+ YEARS EXPERIENCE</div>
+            <div class="offer-item">👥 500+ CUSTOMERS</div>
+            <div class="offer-item">⭐ 5★ RATING</div>
+            <div class="offer-item">🛡️ 100% SAFE & HYGIENIC</div>
+            <div class="offer-item">💰 ₹399 PER SQ INCH</div>
+            <div class="offer-item">🎯 UPTO 30% OFF</div>
+            <div class="offer-item">📅 5+ YEARS EXPERIENCE</div>
+            <div class="offer-item">👥 500+ CUSTOMERS</div>
+            <div class="offer-item">⭐ 5★ RATING</div>
+            <div class="offer-item">🛡️ 100% SAFE & HYGIENIC</div>
+            <div class="offer-item">💰 ₹399 PER SQ INCH</div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="greek-doodle greek-doodle-right" aria-hidden="true">
+            <svg viewBox="0 0 180 320" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M18 22h144M28 35h124M38 48h104"/><path d="M42 48v210M138 48v210"/><path d="M52 55v203M72 55v203M108 55v203M128 55v203"/><path d="M32 258h116M24 273h132M16 289h148"/><path d="M35 305h110"/></g></svg>
+        </div>
+        <div class="hero-content">
+            <h1>Best Tattoo Studio<br>in Vadodara</h1>
+            <p>Premium tattoos with precision & artistry</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-book">Book Now</a>
+                <a href="#services" class="btn btn-explore">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats - Horizontal -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">5<span class="stat-plus">+</span></div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">500<span class="stat-plus">+</span></div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5<span class="stat-plus">★</span></div>
+                <div class="stat-label">Google Rating</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Safe & Hygienic</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services -->
+    <section id="services">
+        <h2 class="section-title">Our Specialties</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Custom Designs</h3>
+                <p>Unique tattoos designed specifically for you</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👁️</div>
+                <h3>Realism Tattoos</h3>
+                <p>Hyper-realistic portraits and detailed artwork</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✏️</div>
+                <h3>Fine Line Work</h3>
+                <p>Delicate and elegant minimalist designs</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧵</div>
+                <h3>Sleeve Tattoos</h3>
+                <p>Complete full or half sleeve masterpieces</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💫</div>
+                <h3>Religious Tattoos</h3>
+                <p>Spiritual designs with cultural significance</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💑</div>
+                <h3>Matching Tattoos</h3>
+                <p>Couple designs that complement perfectly</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Stories Carousel -->
+    <section id="gallery" class="carousel-wrapper">
+        <h2 class="section-title">Client Stories</h2>
+        <div class="carousel-items">
+            <div class="carousel-item">
+                <div class="carousel-image">📸 Client Photo</div>
+                <div class="carousel-content">
+                    <h3>Raj's Sleeve Tattoo</h3>
+                    <p>Got an amazing full sleeve done. Jaimin's precision and creativity are truly unmatched. The tattoo turned out exactly as I envisioned it!</p>
+                    <div class="carousel-rating">⭐⭐⭐⭐⭐ Amazing Experience</div>
+                    <p><strong>Raj P.</strong> • Vadodara</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-image">📸 Client Photo</div>
+                <div class="carousel-content">
+                    <h3>Priya's Portrait Tattoo</h3>
+                    <p>The realism in my portrait tattoo is absolutely incredible! Every single detail is perfect. Professional, hygienic, and the best experience ever.</p>
+                    <div class="carousel-rating">⭐⭐⭐⭐⭐ Highly Recommended</div>
+                    <p><strong>Priya S.</strong> • Vadodara</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-image">📸 Client Photo</div>
+                <div class="carousel-content">
+                    <h3>Aditya's Fine Line Design</h3>
+                    <p>Absolutely stunning fine line work. The attention to detail and clean execution is remarkable. Will definitely come back for more tattoos!</p>
+                    <div class="carousel-rating">⭐⭐⭐⭐⭐ Outstanding Quality</div>
+                    <p><strong>Aditya M.</strong> • Vadodara</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="process" class="process-section">
+        <div class="greek-doodle greek-doodle-left" aria-hidden="true">
+            <svg viewBox="0 0 180 320" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M18 22h144M28 35h124M38 48h104"/><path d="M42 48v210M138 48v210"/><path d="M52 55v203M72 55v203M108 55v203M128 55v203"/><path d="M32 258h116M24 273h132M16 289h148"/><path d="M35 305h110"/></g></svg>
+        </div>
+        <div class="process-inner">
+            <div class="process-heading">
+                <span>YOUR TATTOO JOURNEY</span>
+                <h2>How It Works</h2>
+                <p>From the first conversation to the finished tattoo, every step is planned around you.</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step reveal"><div class="process-number">01</div><div><h3>Consult</h3><p>Tell us your idea, placement, size and style.</p></div></div>
+                <div class="process-step reveal"><div class="process-number">02</div><div><h3>Design</h3><p>We refine a custom design and prepare it for your skin.</p></div></div>
+                <div class="process-step reveal"><div class="process-number">03</div><div><h3>Ink</h3><p>Your tattoo is created with professional, hygienic equipment.</p></div></div>
+                <div class="process-step reveal"><div class="process-number">04</div><div><h3>Aftercare</h3><p>Get clear aftercare guidance for a smooth healing process.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Section -->
+    <section id="school">
+        <div class="school-section">
+            <h2>Tattoo Training Academy</h2>
+            <p>Professional tattoo training program</p>
+            <div class="school-number">10+</div>
+            <p>Trained Professional Students</p>
+            <button class="btn btn-book">Enroll Now</button>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-grid">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.5574857584477!2d73.16897!3d22.307695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc932f562a5e5%3A0x6e7e5d9358efe69!2sThe%20Kala%20Culture%20Tattoos!5e0!3m2!1sen!2sin!4v1234567890" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="form-box">
+                <h3>Send us a Message</h3>
+                <form onsubmit="alert('✅ Thank you! We will contact you soon.'); return false;">
+                    <input type="text" placeholder="Your Full Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="tel" placeholder="Your Phone Number" required>
+                    <textarea placeholder="Tell us about your tattoo idea..." rows="5" required></textarea>
+                    <button type="submit">Send Inquiry</button>
+                </form>
+                <div class="contact-info">
+                    <p><strong>📍 Location</strong><br>102, Neelkanth Gold Complex<br>Vasna-Bhayli Rd, Vadodara</p>
+                    <p><strong>📞 Phone</strong><br>+91 9157714414</p>
+                    <p><strong>📧 Email</strong><br>thekalaculture0@gmail.com</p>
+                    <a class="google-review-link" href="https://maps.app.goo.gl/zzibzD1SfPJFj7vJ7" target="_blank" rel="noopener">★ View our Google reviews</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>The Kala Culture Tattoos</h3>
+                <p>Premium tattoo studio with 5+ years of expertise and 500+ satisfied customers.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#school">School</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <a href="https://instagram.com/thekalaaculturetattoos" target="_blank">Instagram</a>
+                <a href="https://wa.me/919157714414" target="_blank">WhatsApp</a>
+                <a href="https://maps.app.goo.gl/zzibzD1SfPJFj7vJ7" target="_blank">Google Maps</a>
+            </div>
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <p>Mon - Sun: 10 AM - 8 PM<br>Emergency: 24/7 Available</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 The Kala Culture Tattoos. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
