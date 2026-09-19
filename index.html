@@ -2802,6 +2802,9 @@ The studio atmosphere was hygienic, professional, and very comfortable. The arti
             'matching':       { title: 'Matching Tattoos', icon: 'MATCHING', count: 6 }
         };
 
+        // Supported photo file types for gallery/service images (any case).
+        var IMG_EXTS = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
+
         // Put one real tattoo image behind each specialty card without loading giant embedded icons.
         (function(){
             var fallbackClient = {
@@ -2811,14 +2814,9 @@ The studio atmosphere was hygienic, professional, and very comfortable. The arti
             document.querySelectorAll('#services .feature-card').forEach(function(card){
                 var slug = card.getAttribute('data-category');
                 var n = fallbackClient[slug] || '01';
-                var candidates = [
-                    'gallery/' + slug + '/1.jpg',
-                    'gallery/' + slug + '/1.jpeg',
-                    'gallery/' + slug + '/1.png',
-                    'images/clients/client-' + n + '.jpeg',
-                    'images/clients/client-' + n + '.jpg',
-                    'images/clients/client-' + n + '.png'
-                ];
+                var candidates = [];
+                IMG_EXTS.forEach(function(ext){ candidates.push('gallery/' + slug + '/1.' + ext); });
+                IMG_EXTS.forEach(function(ext){ candidates.push('images/clients/client-' + n + '.' + ext); });
                 var idx = 0;
                 function next(){
                     if(idx >= candidates.length) return;
@@ -2845,11 +2843,7 @@ The studio atmosphere was hygienic, professional, and very comfortable. The arti
                 img.alt = data.title + ' photo ' + i;
                 img.loading = 'lazy';
                 img.decoding = 'async';
-                var candidates = [
-                    'gallery/' + slug + '/' + i + '.jpg',
-                    'gallery/' + slug + '/' + i + '.jpeg',
-                    'gallery/' + slug + '/' + i + '.png'
-                ];
+                var candidates = IMG_EXTS.map(function(ext){ return 'gallery/' + slug + '/' + i + '.' + ext; });
                 let candidateIndex = 0;
                 function loadNext(){
                     if(candidateIndex >= candidates.length){
